@@ -14,6 +14,7 @@ pub async fn run(state: AppState) {
         .await
         .expect("The listener should be able to bind to this port");
 
+    println!("Serving 0.0.0.0:7878");
     axum::serve(listener, router)
         .await
         .expect("The server should launch successfully")
