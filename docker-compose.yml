@@ -1,0 +1,26 @@
+services:
+    manganotif:
+        image: ghcr.io/v4ldum/manganotif:latest
+        restart: unless-stopped
+        networks:
+            - "netv6"
+        environment:
+            - TZ=Europe/Paris
+        volumes:
+            - type: bind
+              source: /root/manganotif/db/
+              target: /app/db/
+            - type: bind
+              source: /root/manganotif/manganotif.env
+              target: /app/.env
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.manganotif.tls=true"
+            - "traefik.http.routers.manganotif.entrypoints=websecure"
+            - "traefik.http.middlewares.api-prefix.stripprefix.prefixes=/api"
+            - "traefik.http.routers.manganotif.middlewares=api-prefix"
+            - "traefik.http.routers.manganotif.rule=Host(`manganotif.valdum.dev`) && PathPrefix(`/api`)"
+
+networks:
+    netv6:
+        external: true
