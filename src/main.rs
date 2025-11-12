@@ -18,7 +18,8 @@ async fn main() -> Result<()> {
             SqliteJournalMode::Delete
         } else {
             // https://x.com/levelsio/status/1867660294358806858
-            SqliteJournalMode::Wal
+            //SqliteJournalMode::Wal
+            SqliteJournalMode::Delete
         })
         .create_if_missing(true);
     let database = SqlitePool::connect_with(options).await?;
