@@ -14,4 +14,4 @@ COPY --from=build /work/target/x86_64-unknown-linux-gnu/release/manganotif-api .
 COPY --from=busybox:1.35-glibc /bin/sh /bin/busybox /bin/
 
 EXPOSE 7878
-ENTRYPOINT ["sh", "-c", "/app/manganotif-api >> /app/manganotif.log"]
+ENTRYPOINT ["/bin/sh", "-c", "/app/manganotif-api >> /app/manganotif.log"]
