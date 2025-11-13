@@ -13,4 +13,4 @@ WORKDIR /app
 COPY --from=build /work/target/x86_64-unknown-linux-gnu/release/manganotif-api .
 
 EXPOSE 7878
-ENTRYPOINT ["/app/manganotif-api"]
+ENTRYPOINT ["sh", "-c", "/app/manganotif-api >> /app/manganotif.log"]

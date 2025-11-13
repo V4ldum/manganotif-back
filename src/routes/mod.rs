@@ -17,10 +17,11 @@ pub(super) fn router(state: AppState) -> axum::Router {
     //    .allow_methods([Method::GET, Method::POST, Method::PATCH, Method::DELETE])
     //    .allow_origin(Any);
 
+    // TODO v1 needs refactoring
     Router::new()
-        .route("/adm/manga", get(get_all_mangas))
-        .route("/adm/manga/not_found", get(get_all_mangas_not_found))
-        .route("/adm/manga/global", get(get_all_global_mangas))
+        .route("/v1/adm/manga", get(get_all_mangas))
+        .route("/v1/adm/manga/not_found", get(get_all_mangas_not_found))
+        .route("/v1/adm/manga/global", get(get_all_global_mangas))
         // Anything above needs authentication
         .route_layer(from_fn_with_state(state.clone(), check_auth))
         // Anything above can use the state
