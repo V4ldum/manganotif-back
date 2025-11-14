@@ -20,30 +20,35 @@ impl APIError {
             reason: String::from("Database error"),
         }
     }
+
     //pub fn unknown_query(query: &str) -> Self {
     //    APIError {
     //        code: StatusCode::BAD_REQUEST,
     //        reason: format!("Unknown query: {query}"),
     //    }
     //}
+    //
     pub fn no_api_key() -> Self {
         APIError {
             code: StatusCode::BAD_REQUEST,
             reason: String::from(r#"API key required"#),
         }
     }
+
     pub fn bad_api_key() -> Self {
         APIError {
             code: StatusCode::UNAUTHORIZED,
             reason: String::from("Invalid API key"),
         }
     }
+
     //pub fn bad_id(id: &str) -> Self {
     //    APIError {
     //        code: StatusCode::NOT_FOUND,
     //        reason: format!("The provided id is invalid: {id}"),
     //    }
     //}
+
     //pub fn invalid_value(reason: &str) -> Self {
     //    APIError {
     //        code: StatusCode::BAD_REQUEST,
