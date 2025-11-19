@@ -8,7 +8,12 @@ use crate::{
     middleware::check_auth,
     routes::{global_manga::get_all_global_mangas, manga::get_all_mangas},
 };
-use axum::{Router, http::Method, middleware::from_fn_with_state, routing::get};
+use axum::{
+    Router,
+    http::{HeaderName, Method, header},
+    middleware::from_fn_with_state,
+    routing::get,
+};
 use health_check::health_check;
 use manga_not_found::get_all_mangas_not_found;
 use tower_http::cors::{Any, CorsLayer};
@@ -16,7 +21,13 @@ use tower_http::cors::{Any, CorsLayer};
 pub(super) fn router(state: AppState) -> axum::Router {
     let cors = CorsLayer::new()
         .allow_methods([Method::GET])
-        .allow_origin(Any);
+        .allow_origin(Any)
+        .allow_headers([
+            header::CONTENT_TYPE,
+            HeaderName::from_static("X-API-Key")
+        ])
+    //.allow_credentials(true) // Necessary?
+    ;
 
     // TODO v1 needs refactoring
     Router::new()
