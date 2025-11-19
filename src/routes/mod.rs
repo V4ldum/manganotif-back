@@ -24,7 +24,7 @@ pub(super) fn router(state: AppState) -> axum::Router {
         .allow_origin(Any)
         .allow_headers([
             header::CONTENT_TYPE,
-            HeaderName::from_static("X-API-Key")
+            HeaderName::from_static("x-api-key")
         ])
     //.allow_credentials(true) // Necessary?
     ;
